@@ -19,17 +19,17 @@
 【設定項目】ユーザが任意で設定
 =========================================================================*/
 // ビデオデバイスの設定ファイル
-char *vconf_name = (char *)"-dev=/dev/video1";
+char *vconf_name = (char *)"-dev=/dev/video0";
 // カメラパラメータファイル
 char *cparam_name = (char *)"Data/camera_para.dat";
 // パターンファイル
 char *patt_name = (char *)"Data/patt.sample1";
 // MQOファイル
-char *seq_name = (char *)"Model/default_%05d.mqo";
+char *seq_name = (char *)"Model1/default_%05d.mqo";
 // フレーム数
-int n_frame = 180;
+int n_frame = 45;
 // 連続描画するときのフレーム数
-int e_frame = 120;
+int e_frame = 9;
 // フレームリセットの閾値
 int resetcap = 5;
 // パターンの中心座標
@@ -66,8 +66,8 @@ void mySetLight(void);
 =========================================================================*/
 int main(int argc, char **argv)
 {
-	ARParam cparam;			// カメラパラメータ
-	ARParam wparam;			// カメラパラメータ (作業用変数)
+	ARParam cparam;		// カメラパラメータ
+	ARParam wparam;		// カメラパラメータ (作業用変数)
 	int xsize, ysize;	// 画像サイズ
 
 	// GLUTの初期化
@@ -186,19 +186,19 @@ void MainLoop(void)
 =========================================================================*/
 void mySetLight(void)
 {
-	GLfloat light_diffuse[] = { 0.9, 0.9, 0.9, 1.0 };			// 拡散反射光
-	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };			// 鏡面反射光
-	GLfloat light_ambient[] = { 0.3, 0.3, 0.3, 0.1 };			// 環境光
+	GLfloat light_diffuse[] = { 0.9, 0.9, 0.9, 1.0 };		// 拡散反射光
+	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };		// 鏡面反射光
+	GLfloat light_ambient[] = { 0.3, 0.3, 0.3, 0.1 };		// 環境光
 	GLfloat light_position[] = { 100.0, -200.0, 200.0, 0.0 };	// 位置と種類
 
 	// 光源の設定
-	glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);		// 拡散反射光の設定
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);		// 鏡面反射光の設定
-	glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);		// 環境光の設定
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);		// 位置と種類の設定
+	glLightfv(GL_LIGHT0, GL_DIFFUSE,  light_diffuse);	// 拡散反射光の設定
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);	// 鏡面反射光の設定
+	glLightfv(GL_LIGHT0, GL_AMBIENT,  light_ambient);	// 環境光の設定
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);	// 位置と種類の設定
 
-	glShadeModel(GL_SMOOTH);						// シェーディングの種類の設定
-	glEnable(GL_LIGHT0);							// 光源の有効化
+	glShadeModel(GL_SMOOTH);		// シェーディングの種類の設定
+	glEnable(GL_LIGHT0);			// 光源の有効化
 }
 
 
@@ -207,7 +207,7 @@ void mySetLight(void)
 =========================================================================*/
 void DrawObject(void)
 {
-	static int k = 0;					// 描画するフレームの番号
+	static int k = 0;			// 描画するフレームの番号
 	double gl_para[16];
 
 	// キャプチャの連続を判定
@@ -228,14 +228,14 @@ void DrawObject(void)
 
 	// 3Dオブジェクトの描画
 	glClear(GL_DEPTH_BUFFER_BIT);		// Zバッファの初期化
-	glEnable(GL_DEPTH_TEST);			// 隠面処理の適用
+	glEnable(GL_DEPTH_TEST);		// 隠面処理の適用
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GEQUAL, 0.5);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	mySetLight();						// 光源の設定
-	glEnable(GL_LIGHTING);				// 光源の適用
+	mySetLight();				// 光源の設定
+	glEnable(GL_LIGHTING);			// 光源の適用
 
 	glPushMatrix();
 	glRotatef(90.0, 1.0, 0.0, 0.0);		// モデルを立たせる
@@ -283,10 +283,10 @@ void KeyEvent(unsigned char key, int x, int y)
 =========================================================================*/
 void Cleanup(void)
 {
-	arVideoCapStop();			// ビデオキャプチャの停止
-	arVideoClose();				// ビデオデバイスの終了
-	argCleanup();				// グラフィック処理の終了
+	arVideoCapStop();		// ビデオキャプチャの停止
+	arVideoClose();			// ビデオデバイスの終了
+	argCleanup();			// グラフィック処理の終了
 
 	mqoDeleteSequence(mqo_seq);	// シーケンスの削除
-	GLMetaseqClear();			// 終了処理
+	GLMetaseqClear();		// 終了処理
 }

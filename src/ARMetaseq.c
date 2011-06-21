@@ -75,7 +75,7 @@ void GLMetaseqInitialize() {
 	glDeleteBuffersARB = NULL ;
 
 	if( g_isVBOSupported ) {
-		printf("OpenGL : 頂点バッファをサポートしている→使用する¥n") ;
+		printf("OpenGL : 頂点バッファをサポートしている→使用する\n") ;
 		// GL 関数のポインタを所得する
 		glGenBuffersARB = (PFNGLGENBUFFERSARBPROC) wglGetProcAddress("glGenBuffersARB");
 		glBindBufferARB = (PFNGLBINDBUFFERARBPROC) wglGetProcAddress("glBindBufferARB");
@@ -119,7 +119,7 @@ GLuint mqoSetTexturePool(char *texfile,char *alpfile,unsigned char alpha)
 		return  l_texPool[pos].texture_id ;
 	}
 	if( MAX_TEXTURE <= pos ) {
-		printf("%s:mqoSetTexturePool テクスチャ読み込み領域不足¥n",__FILE__) ;
+		printf("%s:mqoSetTexturePool テクスチャ読み込み領域不足\n",__FILE__) ;
 		return -1 ;
 	}
 	image = mqoLoadTextureEx(texfile,alpfile,&l_texPool[pos].texsize,alpha) ;
@@ -227,22 +227,20 @@ GLubyte* mqoLoadTextureEx(char *texfile,char *alpfile,int *tex_size,unsigned cha
 		isTGA = (strcmp(ext,"tga")==0)?1:0 ;
 		isPNG = (strcmp(ext,"png")==0)?1:0 ;
 		isJPEG = (strcmp(ext,"jpg")==0)?1:0 ;
-		/* */
 		if( (! isTGA) && (! isPNG) &&(! isJPEG) ) {
 			filename[fl][namelen-3] = 'b' ;
 			filename[fl][namelen-2] = 'm' ;
 			filename[fl][namelen-1] = 'p' ;
 		}
-		/* */
 		if( fl == 1 ) { //アルファの読み込みはＴＧＡorＰＮＧ
 			if( ! (isTGA || isPNG) ) {
-				printf("アルファのファイルに対応できない→%s¥n",filename[fl]) ;
+				printf("アルファのファイルに対応できない→%s\n",filename[fl]) ;
 				break ;
 			}
 		}
 		if( fp != NULL ) fclose(fp) ;
 		if ( (fp=fopen(filename[fl],"rb"))==NULL ) {
-			printf("%s:テクスチャ読み込みエラー[%s]¥n",__FILE__,filename[fl]) ;
+			printf("%s:テクスチャ読み込みエラー[%s]\n",__FILE__,filename[fl]) ;
 			continue ;
 		}
 		// ヘッダのロード
@@ -286,10 +284,10 @@ GLubyte* mqoLoadTextureEx(char *texfile,char *alpfile,int *tex_size,unsigned cha
 			jpeg_finish_decompress( &cinfo );	//解凍終了
 			jpeg_destroy_decompress( &cinfo );	//解凍用情報解放
 			if( !(cinfo.out_color_components == 3 && cinfo.out_color_space == JCS_RGB) ) {
-				printf("JPEG 対応できないフォーマット→%s¥n",filename[fl]) ;
+				printf("JPEG 対応できないフォーマット→%s\n",filename[fl]) ;
 			}
 #else
-			printf("このテクスチャは対応できないフォーマット→%s¥n",filename[fl]) ;
+			printf("このテクスチャは対応できないフォーマット→%s\n",filename[fl]) ;
 			continue ;
 #endif
 		}
@@ -323,7 +321,7 @@ GLubyte* mqoLoadTextureEx(char *texfile,char *alpfile,int *tex_size,unsigned cha
 	        &png_ptr, &info_ptr, (png_infopp)NULL);
 			size = width[fl] = pngwidth ;
 #else
-			printf("このテクスチャは対応できないフォーマット→%s¥n",filename[fl]) ;
+			printf("このテクスチャは対応できないフォーマット→%s\n",filename[fl]) ;
 			continue ;
 #endif
 		}
@@ -814,7 +812,7 @@ void mqoSet(E_MQO mode,STR_MQO_OBJECT * object,...)
 		}
 		break ;
 	default :
-		printf("mqoSet : 未定義の処理[%d]¥n",mode) ;
+		printf("mqoSet : 未定義の処理[%d]\n",mode) ;
 		break ;
 	}
 
@@ -854,7 +852,7 @@ void mqoGet(E_MQO mode,STR_MQO_OBJECT * object,...)
 		}
 		break ;
 	default :
-		printf("mqoGet : 未定義の処理[%d]¥n",mode) ;
+		printf("mqoGet : 未定義の処理[%d]\n",mode) ;
 		break ;
 	}
 
@@ -1567,7 +1565,7 @@ void mqoMakePolygonEx(char *objname,int isVisible,STR_MQO_OBJECT * mqoobj,
 	}
 	mqoobj->objnum++ ;
 	if( MAX_OBJECT <= mqoobj->objnum ) {
-		printf("MQOファイル読み込み：　最大オブジェクト数を超えました[%d]¥n",mqoobj->objnum) ;
+		printf("MQOファイル読み込み：　最大オブジェクト数を超えました[%d]\n",mqoobj->objnum) ;
 		mqoobj->objnum = MAX_OBJECT-1 ;
 	}
 

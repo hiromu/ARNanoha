@@ -10,15 +10,15 @@
 // libpng の使用 (1:使用 0:未使用)
 #define DEF_USE_LIBPNG			1
 // 最大取り扱いテクスチャ
-#define MAX_TEXTURE				100
+#define MAX_TEXTURE			100
 // (1MQOファイル内の)最大オブジェクト数
-#define MAX_OBJECT				50
+#define MAX_OBJECT			50
 // 文字列バッファのサイズ
-#define SIZE_STR				256
+#define SIZE_STR			256
 // 1個のファイル内にあるオブジェクト(パーツ)の最大数
-#define N_OBJ					MAX_OBJECT
+#define N_OBJ				MAX_OBJECT
 // byte order指定(intel系:1)
-#define DEF_IS_LITTLE_ENDIAN	1
+#define DEF_IS_LITTLE_ENDIAN		1
 
 
 /*=========================================================================
