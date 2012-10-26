@@ -19,17 +19,19 @@
 【設定項目】ユーザが任意で設定
 =========================================================================*/
 // ビデオデバイスの設定ファイル
-char *vconf_name = (char *)"-dev=/dev/video1";
+char *vconf_name = (char *)"-dev=/dev/video0 -palette=YUV422P -width=800 -height=600";
 // カメラパラメータファイル
 char *cparam_name = (char *)"Data/camera_para.dat";
 // パターンファイル
 char *patt_name = (char *)"Data/patt.sample1";
 // MQOファイル
-char *seq_name = (char *)"Model3/default_%05d.mqo";
+char *seq_name = (char *)"Model1/default_%05d.mqo";
+// 使うフレームの種類
+int framenum = 1;
 // フレーム数
-int n_frame = 105;
+int n_frame = 180;
 // 連続描画するときのフレーム数
-int e_frame = 33;
+int e_frame = 120;
 // フレームリセットの閾値
 int resetcap = 5;
 // パターンの中心座標
@@ -48,6 +50,7 @@ int count = 0;			// フレームカウント用
 int patt_id;			// パターンのID
 double patt_trans[3][4];	// 座標変換行列
 MQO_SEQUENCE mqo_seq;		// シーケンス
+char *seqfile;
 
 
 /*=========================================================================

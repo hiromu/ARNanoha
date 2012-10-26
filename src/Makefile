@@ -4,7 +4,7 @@ BIN_DIR= ../bin
 
 LDFLAG= -L/usr/X11R6/lib -L$(LIB_DIR)
 LIBS= -lARgsub -lARvideo -lAR -lglut -lGLU -lGL -lGLEW -lXi -lXmu -lX11 -lm -lpng
-CFLAG= -O -I/usr/X11R6/include -DUSE_EYETOY -I$(INC_DIR)
+CFLAG= -O -I/usr/X11R6/include -DUSE_EYETOY -I$(INC_DIR) -g
 
 OBJS = magic.o ARMetaseq.a 
 HEADDERS = ARMetaseq.h

@@ -167,8 +167,8 @@
 #    define   VIDEO_MODE_NTSC             1
 #    define   VIDEO_MODE_SECAM            2
 #    define   DEFAULT_VIDEO_DEVICE        "/dev/video0"
-#    define   DEFAULT_VIDEO_WIDTH         640
-#    define   DEFAULT_VIDEO_HEIGHT        480
+#    define   DEFAULT_VIDEO_WIDTH         800
+#    define   DEFAULT_VIDEO_HEIGHT        600
 #    define   DEFAULT_VIDEO_CHANNEL       1
 #    define   DEFAULT_VIDEO_MODE          VIDEO_MODE_NTSC
 #  endif
